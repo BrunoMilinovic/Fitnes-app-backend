@@ -1,0 +1,66 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+// User one to one UserInput !!!!! -
+model Userinput {
+  @@map(name:"userinput")
+  id  Int @id  @default(autoincrement())
+  Trener String @db.VarChar(200)
+  Plan String @db.VarChar(200)
+  Program String @db.TinyText	
+  Number_Trening String @db.TinyText	
+  Working_team String @db.TinyText	
+  Food  String @db.LongText
+  Height Int
+  Weight Int
+  User_name String  @db.VarChar(200)
+  User_email String @db.VarChar(200) @unique
+} 
+
+model User {
+  @@map(name:"user")
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(255) 
+  email String @db.VarChar(255) @unique
+  Role String @db.VarChar(45) @default("visitor")
+  Status String @db.VarChar(45) @default("active")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+}
+
+model Trening {
+  @@map(name:"trening")
+  id  Int @id  @default(autoincrement())
+  UserName String @db.VarChar(200) 
+  Treningtype String @db.VarChar(200)
+  Ponavljanje String @db.VarChar(200)
+  Date String @db.TinyText	
+  Hour  String @db.LongText
+  Opistreninga String @db.LongText	
+  Pauze String @db.VarChar(200)
+}
+ 
+ model Post {
+  @@map(name:"post")
+  id  Int @id  @default(autoincrement())
+  First_Name String @db.VarChar(200)
+  Last_Name String @db.VarChar(200)
+  Title String @db.TinyText	
+  Subtitle String @db.TinyText	
+  Message  String @db.LongText
+  Email String @db.TinyText	
+  Image String @db.LongText
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+       
